@@ -1,7 +1,7 @@
 name: Walmart Tire Price Tracker
 on:
   schedule:
-    - cron: '0 */6 * * *' # Runs every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -28,6 +28,9 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python main.py
+        
+      - name: Pull Latest Changes
+        run: git pull origin main
         
       - name: Save State
         uses: stefanzweifel/git-auto-commit-action@v5
